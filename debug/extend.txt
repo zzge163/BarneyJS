@@ -1,0 +1,3 @@
+1、根目录下添加：leaflet-0.7.7、Proj4Leaflet-0.7.2目录
+2、src目录下添加：SxMap.js
+3、src\Layers\目录下添加：SxBasemapLayer.js
