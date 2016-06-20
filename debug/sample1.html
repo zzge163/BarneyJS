@@ -1,0 +1,40 @@
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <title>Test "prototype"</title>
+    <script type="text/javascript">
+        function ClassA() {
+            alert("a");
+            this.a = function () {
+                alert();
+            };
+        }
+
+        function ClassB() {
+            alert("b");
+            this.b = function () {
+                alert();
+            };
+        }
+        ClassB.prototype.a = new ClassA();        //会导致弹出 a 对话框
+        ClassB.prototype.xx = "xx";
+
+        function initialize() {
+            var objB1 = new ClassB();                 //弹出 b 对话框
+            var objB2 = new ClassB();                 //弹出 b 对话框
+            alert(objB1.a == objB2.a);                    //true
+            alert(objB1.b == objB2.b);                //false
+            alert("objB1.xx: " + objB1.xx + ", objB2.xx: " + objB2.xx); //objB1.xx: xx, objB2.xx: xx
+            ClassB.prototype.xx = "yy";
+            alert("objB1.xx: " + objB1.xx + ", objB2.xx: " + objB2.xx); //objB1.xx: yy, objB2.xx: yy
+            objB2.xx = "zz";
+            alert("objB1.xx: " + objB1.xx + ", objB2.xx: " + objB2.xx); //objB1.xx: yy, objB2.xx: zz
+        }
+    </script>
+</head>
+<body>
+<script type="text/javascript">
+    initialize();
+</script>
+</body>
+</html>

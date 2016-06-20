@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Esri Leaflet Debugging Sample</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no'/>
+
+    <!-- Load Leaflet from CDN-->
+    <link rel="stylesheet" href="../leaflet-0.7.7/leaflet.css"/>
+    <script src="../leaflet-0.7.7/leaflet-src.js"></script>
+
+    <script src="../Proj4Leaflet-0.7.2/proj4-src-2.3.12.js"></script>
+    <script src="../Proj4Leaflet-0.7.2/proj4leaflet.js"></script>
+
+    <!--<script src="https://rawgit.com/proj4js/proj4js/2.3.12/dist/proj4-src.js"></script>-->
+    <!--<script src="https://rawgit.com/kartena/Proj4Leaflet/1.0.0-beta.1/src/proj4leaflet.js"></script>-->
+
+    <!-- Load Esri Leaflet from source-->
+    <script src="../src/EsriLeaflet.js"></script>
+    <script src="../src/Request.js"></script>
+    <script src="../src/Util.js"></script>
+    <script src="../src/Controls/Logo.js"></script>
+
+    <!--<script src="../src/Services/Service.js"></script>-->
+    <!--<script src="../src/Services/FeatureLayerService.js"></script>-->
+    <!--<script src="../src/Services/ImageService.js"></script>-->
+    <!--<script src="../src/Services/MapService.js"></script>-->
+
+    <!--<script src="../src/Layers/FeatureLayer/FeatureGrid.js"></script>-->
+    <!--<script src="../src/Layers/FeatureLayer/FeatureManager.js"></script>-->
+    <!--<script src="../src/Layers/FeatureLayer/FeatureLayer.js"></script>-->
+
+    <!--<script src="../src/Layers/RasterLayer.js"></script>-->
+    <!--<script src="../src/Layers/ImageMapLayer.js"></script>-->
+    <!--<script src="../src/Layers/TiledMapLayer.js"></script>-->
+    <script src="../src/Layers/SxBasemapLayer.js"></script>
+    <script src="../src/SxMap.js"></script>
+    <script src="../src/SxKey.js"></script>
+    <!--<script src="../src/Layers/DynamicMapLayer.js"></script>-->
+
+    <!--<script src="../src/Tasks/Task.js"></script>-->
+    <!--<script src="../src/Tasks/Find.js"></script>-->
+    <!--<script src="../src/Tasks/Identify.js"></script>-->
+    <!--<script src="../src/Tasks/IdentifyFeatures.js"></script>-->
+    <!--<script src="../src/Tasks/IdentifyImage.js"></script>-->
+    <!--<script src="../src/Tasks/Query.js"></script>-->
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        #map {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            left: 0;
+        }
+
+        #info-pane {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 10;
+            padding: 1em;
+            background: white;
+        }
+    </style>
+</head>
+<body>
+
+<div id="map"></div>
+
+<script>
+    var map = L.esri.sxMap('map').setView([34.259, 108.947], 8);
+    L.esri.sxBasemapLayer('VectorMap',
+            {
+                token: 'aV3wFRG2bN6APL*c',
+                style: L.esri.sxKey().TIANDITU
+            }
+    ).addTo(map);
+    L.esri.sxBasemapLayer('VectorMapLabel',
+            {
+                token: 'IOQt9yAREK1QsRoq',
+                style: L.esri.sxKey().TIANDITU
+            }
+    ).addTo(map);
+
+//    L.esri.sxBasemapLayer('ImgMap',
+//            {
+//                token: 'Zovgh1XnQhHeF7rX',
+//                style: L.esri.sxKey().TIANDITU
+//            }
+//    ).addTo(map);
+//    L.esri.sxBasemapLayer('ImgMapLabel',
+//            {
+//                token: 'v3P4Z5RrYYP5gb1H',
+//                style: L.esri.sxKey().TIANDITU
+//            }
+//    ).addTo(map);
+
+//    L.esri.sxBasemapLayer('ShadeMap',
+//            {
+//                token: 'Zovgh1XnQhHeF7rX',
+//                style: L.esri.sxKey().TIANDITU
+//            }
+//    ).addTo(map);
+//    L.esri.sxBasemapLayer('ShadeMapLabel',
+//            {
+//                token: 'v3P4Z5RrYYP5gb1H',
+//                style: L.esri.sxKey().TIANDITU
+//            }
+//    ).addTo(map);
+</script>
+
+</body>
+</html>

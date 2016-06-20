@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Esri Leaflet Debugging Sample</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no'/>
+
+    <!-- Load Leaflet from CDN-->
+    <link rel="stylesheet" href="../leaflet-0.7.7/leaflet.css"/>
+    <script src="../leaflet-0.7.7/leaflet-src.js"></script>
+
+    <script src="../Proj4Leaflet-0.7.2/proj4-src-2.3.12.js"></script>
+    <script src="../Proj4Leaflet-0.7.2/proj4leaflet.js"></script>
+
+    <!--<script src="https://rawgit.com/proj4js/proj4js/2.3.12/dist/proj4-src.js"></script>-->
+    <!--<script src="https://rawgit.com/kartena/Proj4Leaflet/1.0.0-beta.1/src/proj4leaflet.js"></script>-->
+
+    <!-- Load Esri Leaflet from source-->
+    <script src="../src/EsriLeaflet.js"></script>
+    <script src="../src/Request.js"></script>
+    <script src="../src/Util.js"></script>
+    <script src="../src/Controls/Logo.js"></script>
+
+    <script src="../src/Services/Service.js"></script>
+    <script src="../src/Services/FeatureLayerService.js"></script>
+    <script src="../src/Services/ImageService.js"></script>
+    <script src="../src/Services/MapService.js"></script>
+
+    <!--<script src="../src/Layers/FeatureLayer/FeatureGrid.js"></script>-->
+    <!--<script src="../src/Layers/FeatureLayer/FeatureManager.js"></script>-->
+    <!--<script src="../src/Layers/FeatureLayer/FeatureLayer.js"></script>-->
+
+    <script src="../src/Layers/RasterLayer.js"></script>
+    <script src="../src/Layers/ImageMapLayer.js"></script>
+    <script src="../src/Layers/TiledMapLayer.js"></script>
+    <script src="../src/Layers/SxBasemapLayer.js"></script>
+    <script src="../src/SxKey.js"></script>
+    <script src="../src/Layers/DynamicMapLayer.js"></script>
+
+    <script src="../src/Tasks/Task.js"></script>
+    <script src="../src/Tasks/Find.js"></script>
+    <script src="../src/Tasks/Identify.js"></script>
+    <script src="../src/Tasks/IdentifyFeatures.js"></script>
+    <script src="../src/Tasks/IdentifyImage.js"></script>
+    <script src="../src/Tasks/Query.js"></script>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        #map {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            left: 0;
+        }
+
+        #info-pane {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 10;
+            padding: 1em;
+            background: white;
+        }
+    </style>
+</head>
+<body>
+
+<div id="map"></div>
+
+<script>
+    var crs = new L.Proj.CRS('EPSG:4326', '+proj=longlat +datum=WGS84 +no_defs ', {
+        origin: [-180.0, 90.0],
+        resolutions: [
+            1.40625,
+            0.703125,
+            0.3515625,
+            0.17578125,
+            0.08789062500000003,
+            0.043945312500000014,
+            0.021972656250000007,
+            0.010986328125000003,
+            0.005493164062500002,
+            0.002746582031250001,
+            0.0013732910156250004,
+            6.866455078125002E-4,
+            3.433227539062501E-4,
+            1.7166137695312505E-4,
+            8.583068847656253E-5,
+            4.2915344238281264E-5,
+            2.1457672119140632E-5,
+            1.0728836059570316E-5,
+            5.364418029785158E-6,
+            2.682209014892579E-6,
+            1.3411045074462895E-6
+        ]
+    });
+    var map = L.map('map', {
+        crs: crs
+    }).setView([34.259, 108.947], 8);
+
+    L.esri.sxBasemapLayer('VectorMap',
+            {
+                token: 'G678#*&HUIIPI',
+                style: L.esri.sxKey().YOUMAP
+            }
+    ).addTo(map);
+
+    L.esri.dynamicMapLayer({
+        f: 'json',
+//        url: 'http://localhost:6080/arcgis/rest/services/OriginPoi/MapServer',
+//        url: 'http://124.115.170.132:8080/ServiceSystem/services/rest/BouCity_py/PEZrQcDdzVTEXu2P/TFServer', // 地市
+        url: 'http://124.115.170.132:8080/ServiceSystem/services/rest/BouCounty_py/P8YtKtIiIuKLHbbU/TFServer', // 区县
+        opacity: 1.0,
+        useCors: false
+    }).addTo(map);
+</script>
+
+</body>
+</html>

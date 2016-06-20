@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <!--The viewport meta tag is used to improve the presentation and behavior of the samples
+      on iOS devices-->
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no">
+    <title>Dynamically Create Map Service Layer List</title>
+    <link rel="stylesheet" href="http://jsapi.thinkgis.cn/dijit/themes/claro/claro.css">
+    <link rel="stylesheet" href="http://jsapi.thinkgis.cn/esri/css/esri.css">
+
+    <script src="http://jsapi.thinkgis.cn/init.js"></script>
+
+    <script>
+        var layer, map, visible = [];
+
+        require([
+            "esri/map", "esri/layers/ArcGISDynamicMapServiceLayer",
+            "dojo/dom", "dojo/on", "dojo/query", "dojo/_base/array",
+            "dojo/domReady!"
+        ], function (Map, ArcGISDynamicMapServiceLayer,
+                     dom, on, query, arrayUtils) {
+            map = new Map("map");
+            layer = new ArcGISDynamicMapServiceLayer("http://124.115.170.132:8080/ServiceSystem/services/rest/BouCity_py/PEZrQcDdzVTEXu2P/TFServer", {useMapImage: false});
+            map.addLayer(layer);
+        });
+    </script>
+</head>
+
+<body>
+This sample loads an ArcGISDynamicMapServiceLayer.<br/>
+It determines the layers in the map service and presents them as checkboxes that can be used to toggle their visibility.<br/>
+<br/>
+Layer List : <span id="layer_list"></span><br/>
+<br/>
+
+<div id="map" class="claro" style="width:600px; height:400px; border:1px solid #000;"></div>
+</body>
+</html>

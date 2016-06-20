@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .leaflet-control {
+            pointer-events: auto;
+            position: relative;
+            z-index: 7;
+            margin: 20px;
+        }
+
+        .leaflet-control-scale-line {
+            -moz-border-bottom-colors: none;
+            -moz-border-left-colors: none;
+            -moz-border-right-colors: none;
+            -moz-border-top-colors: none;
+            background: rgba(255, 255, 255, 0.5) none repeat scroll 0 0;
+            border-color: black;
+            border-image: none;
+            border-style: none solid solid;
+            border-width: medium 2px 2px;
+            box-sizing: content-box;
+            font-size: 11px;
+            height: 3px;
+            overflow: hidden;
+            padding: 2px 5px 1px;
+            white-space: nowrap;
+            position: relative
+        }
+
+        .leaflet-control-scale-line:not(:first-child) {
+            border-bottom: medium none;
+            border-top: 2px solid #000;
+            margin-top: -2px;
+        }
+
+        .leaflet-control-scale-text-up {
+            font-size: 11px;
+            margin-left: 6px;
+            margin-bottom: -4px;
+        }
+
+        .leaflet-control-scale-text-down {
+            font-size: 11px;
+            margin-left: 6px;
+            margin-top: -4px;
+        }
+
+        .leaflet-bottom .leaflet-control-scale {
+            margin-bottom: 55px;
+        }
+    </style>
+</head>
+<body>
+<div class="leaflet-control-scale leaflet-control">
+    <div class="leaflet-control-scale-text_up">50米</div>
+    <div>
+        <div class="leaflet-control-scale-line" style="width: 88px;"></div>
+        <div class="leaflet-control-scale-line" style="width: 85px;"></div>
+    </div>
+    <div class="leaflet-control-scale-text_down">90英尺</div>
+</div>
+</body>
+</html>

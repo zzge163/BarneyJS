@@ -1,0 +1,128 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Esri Leaflet Debugging Sample</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no'/>
+
+    <!-- Load Leaflet from CDN-->
+    <link rel="stylesheet" href="http://localhost:8090/leaflet-0.7.7/leaflet.css"/>
+    <script src="http://localhost:8090/leaflet-0.7.7/leaflet-src.js"></script>
+
+    <script src="../Proj4Leaflet-0.7.2/proj4-src-2.3.12.js"></script>
+    <script src="../Proj4Leaflet-0.7.2/proj4leaflet.js"></script>
+
+    <!-- Load Esri Leaflet from source-->
+    <script src="../src/EsriLeaflet.js"></script>
+    <script src="../src/Request.js"></script>
+    <script src="../src/Util.js"></script>
+    <script src="../src/Controls/Logo.js"></script>
+
+    <script src="../src/Services/Service.js"></script>
+    <script src="../src/Services/FeatureLayerService.js"></script>
+    <script src="../src/Services/ImageService.js"></script>
+    <script src="../src/Services/MapService.js"></script>
+
+    <script src="../src/Layers/FeatureLayer/FeatureGrid.js"></script>
+    <script src="../src/Layers/FeatureLayer/FeatureManager.js"></script>
+    <script src="../src/Layers/FeatureLayer/FeatureLayer.js"></script>
+
+    <script src="../src/Layers/RasterLayer.js"></script>
+    <script src="../src/Layers/ImageMapLayer.js"></script>
+    <script src="../src/Layers/TiledMapLayer.js"></script>
+    <script src="../src/Layers/BasemapLayer.js"></script>
+    <script src="../src/Layers/DynamicMapLayer.js"></script>
+
+    <script src="../src/Tasks/Task.js"></script>
+    <script src="../src/Tasks/Find.js"></script>
+    <script src="../src/Tasks/Identify.js"></script>
+    <script src="../src/Tasks/IdentifyFeatures.js"></script>
+    <script src="../src/Tasks/IdentifyImage.js"></script>
+    <script src="../src/Tasks/Query.js"></script>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        #map {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+
+<style>
+    #message { margin: 10px }
+</style>
+
+<div id="map"></div>
+<script>
+
+    var crs = new L.Proj.CRS('EPSG:4326', '+proj=longlat +datum=WGS84 +no_defs ',{
+        origin: [-180.0, 90.0],
+        resolutions: [
+            1.40625,
+            0.703125,
+            0.3515625,
+            0.17578125,
+            0.08789062500000003,
+            0.043945312500000014,
+            0.021972656250000007,
+            0.010986328125000003,
+            0.005493164062500002,
+            0.002746582031250001,
+            0.0013732910156250004,
+            6.866455078125002E-4,
+            3.433227539062501E-4,
+            1.7166137695312505E-4,
+            8.583068847656253E-5,
+            4.2915344238281264E-5,
+            2.1457672119140632E-5,
+            1.0728836059570316E-5,
+            5.364418029785158E-6,
+            2.682209014892579E-6,
+            1.3411045074462895E-6
+        ]
+    });
+
+    var map = L.map('map', {
+        crs: crs
+    }).setView([37.3, 106], 15);
+
+    L.esri.tiledMapLayer({
+        url: "http://emap.shasm.gov.cn/TDTbasemapAggeregator2/rest/services/tdtsxbasemap/MapServer",
+//        url:"http://1.85.55.27:8080/ServiceSystem/services/rest/SxBaseMap_XX/BrY9JnYQ3Vgxi0gL/TileServer",
+        minZoom: 1,
+        maxZoom: 18
+    }).addTo(map);
+
+    map.on('click', function(e) {
+      //  alert(e.latlng); // e is an event object (MouseEvent in this case)
+        //var latlng = L.latLng(45.51, -122.70);
+
+        var query = L.esri.Tasks.query({
+            url: 'http://192.168.1.147:6080/arcgis/rest/services/LeafletBou/MapServer/0'
+        });
+       // query.nearby(e.latlng, 2000).where("direction='East'").orderBy('stop_id', 'ASC');
+        query.where("1=1").run(function(error, featureCollection){
+            console.log('Found ' + featureCollection.features.length + ' features');
+        });
+       /* query.count(function(error, count, response){
+            alert('Found ' + count + ' features');
+        });*/
+
+      /*  query.ids(function(error, ids, response){
+            console.log(ids.join(', ') + 'match the provided parameters');
+            alert( ids.join(', ') + 'match the provided parameters');
+        });*/
+    });
+
+</script>
+</body>
+</html>
